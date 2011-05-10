@@ -5,7 +5,6 @@
 #' @param fNames Name of the tape file to read; if this argument is a vector of several names, function behaves as reading a single tape made of all those tapes joined in a given order. 
 #' @param FUN Callback function.
 #' @param ... Additional parameters to \code{FUN}.
-#' @param fileFormat File format; normally should be left default. See \code{\link{makeFileFormat}} for details.
 #' @author Miron B. Kursa \email{M.Kursa@@icm.edu.pl}
 #' @examples
 #' if(file.exists('tmp.tape')) unlink('tmp.tape')
@@ -17,9 +16,9 @@
 #' unlink('tmp.tape')
 
 
-rtape_apply<-function(fNames,FUN,...,fileFormat=makeFileFormat()){
+rtape_apply<-function(fNames,FUN,...){
  for(fName in fNames){
-  fileFormat(fName,open="rb")->con
+  guessFileFormat(fName)(fName,open="rb")->con
   while(!"try-error"%in%class(try(unserialize(con),silent=TRUE)->x))
    FUN(x,...);
   close(con)

@@ -3,7 +3,6 @@
 #' This function reads are the objects from the tape, in the order they were written on it, and returns them as a list.
 #'
 #' @param fNames Name of the tape file to read; if this argument is a vector of several names, function behaves as reading a single tape made of all those tapes joined in a given order. 
-#' @param fileFormat File format; normally should be left default. See \code{\link{makeFileFormat}} for details.
 #' @return A list containing all the objects stored on the tape.
 #' @author Miron B. Kursa \email{M.Kursa@@icm.edu.pl}
 #' @examples
@@ -16,7 +15,7 @@
 #' print(stored)
 #' unlink('tmp.tape')
 
-rtapeAsList<-function(fNames,fileFormat=makeFileFormat()){
- rtapeLapply(fNames,function(x) x,fileFormat=fileFormat)
+rtapeAsList<-function(fNames){
+ rtapeLapply(fNames,function(x) x)
 }
 

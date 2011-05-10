@@ -6,23 +6,22 @@
 #' @param fNameOut Name of the tape to which store the output of filtering; if this file is one of the input files, this file is overwritten with the output; otherwise the output is appended to this tape. This must be a one-element vector.
 #' @param FUN Callback function which transforms the objects.
 #' @param ... Additional arguments to \code{FUN}. 
-#' @param skipNULLs If true, all the \code{NULL}s returned by \code{FUN} are not appended to the output. Useful to reject some objects from the tape; see \code{\link{rtapeFilter}} for convenience function to do just this task.
-#' @param fileFormatIn File format of the input tape; normally should be left default. See \code{\link{makeFileFormat}} for details.
-#' @param fileFormatOut File format of the output tape; normally should be left default. See \code{\link{makeFileFormat}} for details.
+#' @param skipNULLs If true, all the \code{NULL}s returned by \code{FUN} are not appended to the output. Useful to remove some objects from the tape; see \code{\link{rtapeFilter}} for convenience function to do just this task.
+#' @param fileFormatOut File format; should be left default. See \code{\link{guessFileFormat}} and \code{\link{makeFileFormat}} for details.
 #' @note Overwriting is NOT realised in place, rather by a creation of a temporary file and then using it to overwrite the filtered tape.
 #' @author Miron B. Kursa \email{M.Kursa@@icm.edu.pl}
 
-rtapeRerecord<-function(fNamesIn,fNameOut=fNamesIn,FUN,...,skipNULLs=FALSE,fileFormatIn=makeFileFormat(),fileFormatOut=fileFormatIn){
- stopifnot(length(fNameOut)==1);
+rtapeRerecord<-function(fNamesIn,fNameOut=fNamesIn,FUN,...,skipNULLs=FALSE,fileFormatOut=guessFileFormat(fNameOut)){
+ stopifnot(length(fNameOut)==1)
  if(fNameOut%in%fNamesIn){
-  fNameOut->fNameOverwrite;fNameOut<-tempfile();
+  fNameOut->fNameOverwrite;fNameOut<-tempfile()
  }
  fileFormatOut(fNameOut,open="ab")->conOut
  rtape_apply(fNamesIn,function(x){
   what<-FUN(x,...)
   if(!(skipNULLs & !is.null(what))) serialize(what,conOut,ascii=FALSE)
   NULL
- },fileFormat=fileFormatIn)
+ })
  close(conOut)
  if(exists('fNameOverwrite')){
   file.remove(fNameOverwrite)

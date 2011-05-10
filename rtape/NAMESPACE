@@ -1,1 +1,3 @@
-export(rtapeAdd,rtape_apply,rtapeLapply,rtapeAsList,rtapeFilter,rtapeRerecord,makeFileFormat)
+export(rtapeAdd,rtape_apply,rtapeLapply,rtapeAsList,
+ rtapeFilter,rtapeRerecord,
+ makeFileFormat,guessFileFormat)
