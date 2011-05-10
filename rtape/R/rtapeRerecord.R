@@ -10,6 +10,18 @@
 #' @param fileFormatOut File format; should be left default. See \code{\link{guessFileFormat}} and \code{\link{makeFileFormat}} for details.
 #' @note Overwriting is NOT realised in place, rather by a creation of a temporary file and then using it to overwrite the filtered tape.
 #' @author Miron B. Kursa \email{M.Kursa@@icm.edu.pl}
+#' @examples
+#' if(file.exists('tmp.tape')) unlink('tmp.tape')
+#' if(file.exists('tmp.tape')) unlink('tmp2.tape')
+#' #Record something
+#' for(i in 1:10) rtapeAdd('tmp.tape',i)
+#' #Multiply each object by two
+#' rtapeRerecord('tmp.tape','tmp2.tape','*',2)
+#' #Check it out
+#' unlist(rtapeAsList('tmp.tape'))->A
+#' B<-unlist(rtapeAsList('tmp2.tape'))
+#' print(A);print(B)
+#' stopifnot(all(A==B/2))
 
 rtapeRerecord<-function(fNamesIn,fNameOut=fNamesIn,FUN,...,skipNULLs=FALSE,fileFormatOut=guessFileFormat(fNameOut)){
  stopifnot(length(fNameOut)==1)
