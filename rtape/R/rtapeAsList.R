@@ -6,7 +6,7 @@
 #' @return A list containing all the objects stored on the tape.
 #' @author Miron B. Kursa \email{M.Kursa@@icm.edu.pl}
 #' @examples
-#' if(file.exists('tmp.tape')) unlink('tmp.tape')
+#' unlink('tmp.tape')
 #' #Record something on the tape
 #' rtapeAdd('tmp.tape',iris)
 #' rtapeAdd('tmp.tape',sin(1:10))

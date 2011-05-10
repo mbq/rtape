@@ -11,8 +11,7 @@
 #' @note Overwriting is NOT realised in place, rather by a creation of a temporary file and then using it to overwrite the filtered tape.
 #' @author Miron B. Kursa \email{M.Kursa@@icm.edu.pl}
 #' @examples
-#' if(file.exists('tmp.tape')) unlink('tmp.tape')
-#' if(file.exists('tmp.tape')) unlink('tmp2.tape')
+#' unlink(c('tmp.tape','tmp2.tape'))
 #' #Record something
 #' for(i in 1:10) rtapeAdd('tmp.tape',i)
 #' #Multiply each object by two
@@ -22,6 +21,7 @@
 #' B<-unlist(rtapeAsList('tmp2.tape'))
 #' print(A);print(B)
 #' stopifnot(all(A==B/2))
+#' unlink(c('tmp.tape','tmp2.tape'))
 
 rtapeRerecord<-function(fNamesIn,fNameOut=fNamesIn,FUN,...,skipNULLs=FALSE,fileFormatOut=guessFileFormat(fNameOut)){
  stopifnot(length(fNameOut)==1)

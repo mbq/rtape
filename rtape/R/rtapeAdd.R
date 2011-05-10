@@ -10,7 +10,7 @@
 #' This function is NOT thread/process safe; you must ensure that \code{rtapeAdd} writes to the same tape will never co-occur. The safe version is planned for the next release.
 #' @author Miron B. Kursa \email{M.Kursa@@icm.edu.pl}
 #' @examples
-#' if(file.exists('tmp.tape')) unlink('tmp.tape')
+#' unlink('tmp.tape')
 #' #Record something on the tape
 #' rtapeAdd('tmp.tape',iris)
 #' rtapeAdd('tmp.tape',sin(1:10))
