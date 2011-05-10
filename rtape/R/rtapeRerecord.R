@@ -13,6 +13,7 @@
 
 rtapeRerecord<-function(fNamesIn,fNameOut=fNamesIn,FUN,...,skipNULLs=FALSE,fileFormatOut=guessFileFormat(fNameOut)){
  stopifnot(length(fNameOut)==1)
+ FUN<-match.fun(FUN)
  if(fNameOut%in%fNamesIn){
   fNameOut->fNameOverwrite;fNameOut<-tempfile()
  }

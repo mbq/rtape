@@ -17,6 +17,7 @@
 #' unlink('tmp.tape')
 
 rtapeLapply<-function(fNames,FUN,...){
+ match.fun(FUN)->FUN
  ans<-list()
  for(fName in fNames){
   guessFileFormat(fName)(fName,open="rb")->con
