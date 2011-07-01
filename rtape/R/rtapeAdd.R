@@ -6,6 +6,7 @@
 #' @param what Object to be stored.
 #' @param skipNULLs If true and \code{what} is \code{NULL}, nothing is written to the tape. 
 #' @param fileFormat File format; should be left default. See \code{\link{guessFileFormat}} and \code{\link{makeFileFormat}} for details.
+#' @param safe If true, rtape will use dir-lock to ensure that no other rtape safe appending is in progress. In case of conflict, the function in this mode immediately returns \code{FALSE} and does not try again or wait -- such behaviour must be implemented by user.
 #' @note Remember to use the same \code{fileFormat} value to all writes to a certain tape (or use default format guesser to guarantee this); if not, the tape will become unreadable. For the same reason, don't try to put custom headers/footers or append other data inside tape stream.
 #' This function is NOT thread/process safe; you must ensure that \code{rtapeAdd} writes to the same tape will never co-occur. The safe version is planned for the next release.
 #' @author Miron B. Kursa \email{M.Kursa@@icm.edu.pl}
@@ -19,10 +20,17 @@
 #' print(stored)
 #' unlink('tmp.tape')
 
-rtapeAdd <-function(fName,what,skipNULLs=FALSE,fileFormat=guessFileFormat(fName)){
+rtapeAdd <-function(fName,what,skipNULLs=FALSE,fileFormat=guessFileFormat(fName),safe=FALSE){
+ stopifnot(length(fName)==1)
+ if(safe){
+  lockName<-sprintf('.rtape_%s_lock',fName)
+  if(!dir.create(lockName,FALSE)) return(invisible(FALSE)) 
+   else on.exit({print(lockName);print(unlink(lockName,TRUE))})
+ }
  if(skipNULLs & is.null(what)) return(invisible(NULL))
  fileFormat(fName,open="ab")->con
  serialize(what,con,ascii=FALSE)
  close(con)
+ return(invisible(TRUE))
 }
 
