@@ -1,0 +1,5 @@
+Changes in 1.2:
+    - "Safe mode" for thread-safe writes to the tape.
+
+Changes in 1.0:
+    - First public release.
