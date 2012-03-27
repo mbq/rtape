@@ -1,6 +1,6 @@
 #' Automatically pick proper tape file format.
 #'
-#' This function guesses the tape file format from the file header or assumes default (gzip) if given non-existing file name. Main package functions use this routine to automatically set up file format; if you really need to control it, see \code{\link{makeFileFormat}}.
+#' This function guesses the tape file format from the file header or assumes default (gzip) if given non-existing file name. Main package functions use this routine to automatically setup file format; if you really need to control it, see \code{\link{makeFileFormat}}.
 #'
 #' @param fName Name of the the file to guess format of; if the file is not-existing, the function returns default file format.
 #' @return The function to be passed to the \code{fileFormat*} arguments of other \code{rtape}'s functions.
