@@ -1,3 +1,11 @@
+Changes in 2.0:
+    - Changed the argument order for rtapeRerecord and rtapeFilter
+    to be easier to use. Code using 1.x version of those is most likely
+    broken.
+    - When rerecording a tape onto itself, the temporary file is now
+    created in the same dir as a target tape instead in tempdir().
+    It solves a problem of renaming when tmp is on the other partition.
+
 Changes in 1.2:
     - "Safe mode" for thread-safe writes to the tape.
 
