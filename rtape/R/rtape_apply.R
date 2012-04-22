@@ -11,6 +11,7 @@
 #' #Record something on the tape
 #' rtapeAdd('tmp.tape',runif(3))
 #' rtapeAdd('tmp.tape',rnorm(3))
+#'
 #' #Print tape contents
 #' rtape_apply('tmp.tape',print)
 #' unlink('tmp.tape')
