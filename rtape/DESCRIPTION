@@ -14,5 +14,5 @@ Description: Storing huge data in RData format causes problems because
     append objects to a tape-like file and later iterate over them
     requiring only one copy of each stored object to reside in memory a
     time.
-Version: 1.2
+Version: 1.2.99
 Date: 2011-05-10
