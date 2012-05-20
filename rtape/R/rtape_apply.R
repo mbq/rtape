@@ -21,7 +21,7 @@ rtape_apply<-function(fNames,FUN,...){
  FUN<-match.fun(FUN)
  for(fName in fNames){
   guessFileFormat(fName)(fName,open="rb")->con
-  while(!"try-error"%in%class(try(unserialize(con),silent=TRUE)->x))
+  while(!.ckErr(try(unserialize(con),silent=TRUE)->x))
    FUN(x,...);
   close(con)
  }

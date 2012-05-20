@@ -22,7 +22,7 @@ rtapeLapply<-function(fNames,FUN,...){
  ans<-list()
  for(fName in fNames){
   guessFileFormat(fName)(fName,open="rb")->con
-  while(!"try-error"%in%class(try(unserialize(con),silent=TRUE)->x))
+  while(!.ckErr(try(unserialize(con),silent=TRUE)->x))
    ans<-c(ans,list(FUN(x,...)))
   close(con)
  }

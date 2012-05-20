@@ -21,7 +21,7 @@
 #' print(stored)
 #' unlink('tmp.tape')
 
-rtapeAdd <-function(fName,what,skipNULLs=FALSE,fileFormat=guessFileFormat(fName),safe=FALSE,retryTime=0.1){
+rtapeAdd<-function(fName,what,skipNULLs=FALSE,fileFormat=guessFileFormat(fName),safe=FALSE,retryTime=0.1){
  stopifnot(length(fName)==1)
  lockName<-sprintf('.rtape_%s_lock',fName)
  if(identical(safe,"try")){
