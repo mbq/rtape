@@ -1,3 +1,7 @@
+Changes in 2.1:
+	- Fixed bug that was making rtape prematurely stop reading when
+	encountering an object of a "try-error" class.
+
 Changes in 2.0:
     - Changed the argument order for rtapeRerecord and rtapeFilter
     to be easier to use. Code using 1.x version of those is most likely
