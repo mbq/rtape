@@ -15,5 +15,5 @@ Description: Storing huge data in RData format causes problems because
     requiring only one copy of each stored object to reside in memory a
     time.
 URL: http://mbq.me/rtape
-Version: 2.1
+Version: 2.1.1
 Date: 2011-05-10
