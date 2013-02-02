@@ -1,9 +1,10 @@
-Changes in 2.1.1:
+Changes in 2.2:
     - Fixed typos in docs and description files.
+    - Fixed read problems due to localised error messages.
 
 Changes in 2.1:
-	- Fixed bug that was making rtape prematurely stop reading when
-	encountering an object of a "try-error" class.
+    - Fixed bug that was making rtape prematurely stop reading when
+    encountering an object of a "try-error" class.
 
 Changes in 2.0:
     - Changed the argument order for rtapeRerecord and rtapeFilter

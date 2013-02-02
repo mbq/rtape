@@ -4,7 +4,7 @@
 .ckErr<-function(v){
  if("try-error"%in%class(v)){
   v<-attr(v,"condition")
-  if(identical(v$call,quote(unserialize(con))) && v$message=="error reading from connection")
+  if(identical(v$call,quote(unserialize(con))))
    return(TRUE)
  }
  return(FALSE)
