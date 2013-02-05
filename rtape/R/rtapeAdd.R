@@ -4,7 +4,7 @@
 #'
 #' @param fName Name of the tape file.
 #' @param what Object to be stored.
-#' @param skipNULLs If true and \code{what} is \code{NULL}, nothing is written to the tape. 
+#' @param skipNULLs If true and \code{what} is \code{NULL}, nothing is written to the tape.
 #' @param fileFormat File format; should be left default. See \code{\link{guessFileFormat}} and \code{\link{makeFileFormat}} for details.
 #' @param safe If \code{"try"} or \code{"retry"}, rtape will use dirlock to ensure that no other rtape safe appending is in progress. In case of conflict, the function in "try" mode immediately returns \code{FALSE} and does not try again, while in "retry" mode it sleeps \code{retryTime} seconds and tries again till the dirlock is opened.
 #' @param retryTime If \code{safe} is \code{"retry"}, this parameter sets the interval between writing attempts. Expressed in seconds.
@@ -25,13 +25,24 @@ rtapeAdd<-function(fName,what,skipNULLs=FALSE,fileFormat=guessFileFormat(fName),
  stopifnot(length(fName)==1)
  lockName<-sprintf('.rtape_%s_lock',fName)
  if(identical(safe,"try")){
-  if(!dir.create(lockName,FALSE)) return(invisible(FALSE)) 
+  if(!dir.create(lockName,FALSE)) return(invisible(FALSE))
    else on.exit({unlink(lockName,TRUE)})
  }else{
   if(identical(safe,"retry")){
     #Block on dirlock
     while(!dir.create(lockName,FALSE)) Sys.sleep(retryTime)
     on.exit({unlink(lockName,TRUE)})
+  }
+ }else{
+  if(identical(safe,"rename")){
+   if(!dir.create(lockName,FALSE)){
+    fName<-sprintf("%s_%s",
+     paste(sample(c(letters,0:9),10,replace=TRUE),collapse=""),
+     fName);
+    rtapeAdd(fName,what,skipNULLs,fileFormat,safe="rename")
+   }else{
+    on.exit({unlink(lockName,TRUE)})
+   }
   }
  }
  if(skipNULLs & is.null(what)) return(invisible(NULL))
