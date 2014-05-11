@@ -1,3 +1,5 @@
+    - HEAD argument in rtapeLapply and rtapeAsList.
+
 Changes in 2.2:
     - Fixed typos in docs and description files.
     - Fixed read problems due to localised error messages.
