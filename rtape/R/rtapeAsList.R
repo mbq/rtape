@@ -4,7 +4,7 @@
 #'
 #' @param fNames Name of the tape file to read; if this argument is a vector of several names, function behaves as reading a single tape made of all those tapes joined in a given order.
 #' @param HEAD Only return \code{HEAD} first objects on the tape.
-#' @return A list containing all the objects stored on the tape.
+#' @return A list containing all the objects stored on the tape; objects will have names if given via \code{rtapeAdd} when appending to tape.
 #' @author Miron B. Kursa \email{M.Kursa@@icm.edu.pl}
 #' @examples
 #' unlink('tmp.tape')
