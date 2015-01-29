@@ -32,7 +32,7 @@ rtapeLapply<-function(fNames,FUN,...,HEAD=Inf){
    if(!is.null(xN) || !is.na(xN)){
     names(xx)<-xN;
    }else{
-    ans<-c(ans,list())
+    ans<-c(ans,list(xx))
    }
    processed<-processed+1
    if(processed==HEAD){
